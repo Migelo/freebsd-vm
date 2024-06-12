@@ -26,7 +26,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: Test in FreeBSD
       id: test
-      uses: Migelo/freebsd-vm@v1
+      uses: Migelo/freebsd-vm@v2
       with:
         envs: 'MYTOKEN MYTOKEN2'
         usesh: true
@@ -46,7 +46,7 @@ jobs:
 ```
 
 
-The latest major version is: `v1`, which is the most recommended to use. (You can also use the latest full version: `v1`)  
+The latest major version is: `v2`, which is the most recommended to use. (You can also use the latest full version: `v2`)  
 
 
 If you are migrating from the previous `v0`, please change the `runs-on: ` to `runs-on: ubuntu-latest`
@@ -79,7 +79,7 @@ The code is shared from the host to the VM via `rsync` by default, you can choos
     - uses: actions/checkout@v4
     - name: Test
       id: test
-      uses: Migelo/freebsd-vm@v1
+      uses: Migelo/freebsd-vm@v2
       with:
         envs: 'MYTOKEN MYTOKEN2'
         usesh: true
@@ -108,7 +108,7 @@ When using `rsync`,  you can define `copyback: false` to not copy files back fro
     - uses: actions/checkout@v4
     - name: Test
       id: test
-      uses: Migelo/freebsd-vm@v1
+      uses: Migelo/freebsd-vm@v2
       with:
         envs: 'MYTOKEN MYTOKEN2'
         usesh: true
@@ -134,7 +134,7 @@ You can add NAT port between the host and the VM.
     - uses: actions/checkout@v4
     - name: Test
       id: test
-      uses: Migelo/freebsd-vm@v1
+      uses: Migelo/freebsd-vm@v2
       with:
         envs: 'MYTOKEN MYTOKEN2'
         usesh: true
@@ -154,7 +154,7 @@ The default memory of the VM is 6144MB, you can use `mem` option to set the memo
     - uses: actions/checkout@v4
     - name: Test
       id: test
-      uses: Migelo/freebsd-vm@v1
+      uses: Migelo/freebsd-vm@v2
       with:
         envs: 'MYTOKEN MYTOKEN2'
         usesh: true
@@ -172,7 +172,7 @@ It uses [the FreeBSD 14.0](conf/default.release.conf) by default, you can use `r
     - uses: actions/checkout@v4
     - name: Test
       id: test
-      uses: Migelo/freebsd-vm@v1
+      uses: Migelo/freebsd-vm@v2
       with:
         release: "13.2"
 ...
