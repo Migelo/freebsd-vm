@@ -8,12 +8,12 @@ on:
   push:
     branches:
       - '*'
-    paths:
-      - '**.sh'
-      - '.github/workflows/test.yml'
-      - 'index.js'
-      - 'conf/*'
-      - 'hooks/*'
+    # paths:
+    #   - '**.sh'
+    #   - '.github/workflows/test.yml'
+    #   - 'index.js'
+    #   - 'conf/*'
+    #   - 'hooks/*'
 
 
 
