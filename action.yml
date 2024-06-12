@@ -1,4 +1,4 @@
-name: 'FreeBSD-vm'
+name: 'FreeBSD-vm-ncpu'
 description: 'Run CI in FreeBSD for GitHub Actions'
 inputs:
   prepare:
