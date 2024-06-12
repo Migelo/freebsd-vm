@@ -30,7 +30,7 @@ async function shell(cmd, cdToScriptHome = true) {
 }
 
 
-async function setup(nat, mem) {
+async function setup(nat, mem, cpu) {
   try {
     core.startGroup("Importing VM");
     await shell("bash run.sh importVM");
@@ -43,7 +43,9 @@ async function setup(nat, mem) {
       await shell("bash run.sh setMemory " + mem);
     }
 
-    await shell("bash run.sh setCPU  3");
+    if (cpu) {
+      await shell("bash run.sh setCPU  " + cpu);
+    }
     core.endGroup();
 
     core.startGroup("Run onBeforeStartVM");
@@ -133,7 +135,10 @@ async function main() {
   let mem = core.getInput("mem");
   core.info("mem: " + mem);
 
-  await setup(nat, mem);
+  let cpu = core.getInput("cpu") || "4";
+  core.info("cpu: " + cpu);
+
+  await setup(nat, mem, cpu);
 
   var envs = core.getInput("envs");
   console.log("envs:" + envs);
