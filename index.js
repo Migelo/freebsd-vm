@@ -36,6 +36,10 @@ async function setup(nat, mem, cpu) {
     await shell("bash run.sh importVM");
     core.endGroup();
 
+    core.startGroup("Changing VM settings");
+    await shell("sed -i 's/vcpus 2/vcpus 4/g' vbox.sh");
+    core.endGroup();    
+
     core.startGroup("Set VM");
 
 
