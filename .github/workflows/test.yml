@@ -104,6 +104,7 @@ jobs:
           udp:"8081": "80"
         usesh: true
         run: |
+          echo "nproc=$(nproc)"
           echo "TEST_ENV=abc" >>${GITHUB_ENV}
           pwd
           ls -lah
