@@ -36,11 +36,6 @@ async function setup(nat, mem, cpu) {
     await shell("bash run.sh importVM");
     core.endGroup();
 
-    core.startGroup("Changing VM settings");
-    await shell("sed -i 's/vcpus 2/vcpus 4/g' vbox.sh");
-    await shell("cat vbox.sh");
-    core.endGroup();    
-
     core.startGroup("Set VM");
 
 
@@ -52,6 +47,12 @@ async function setup(nat, mem, cpu) {
       await shell("bash run.sh setCPU  " + cpu);
     }
     core.endGroup();
+
+    core.startGroup("Run sed");
+    await shell("sed -i 's/vcpus 2/vcpus 4/g' vbox.sh");
+    await shell("cat vbox.sh");
+    core.endGroup();    
+
 
     core.startGroup("Run onBeforeStartVM");
     await shell("bash run.sh onBeforeStartVM " );
