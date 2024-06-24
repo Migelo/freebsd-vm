@@ -79,7 +79,7 @@ jobs:
     strategy:
       matrix:
         release: [ "14.0", ]
-        runs: [ "ubuntu-22.04"]
+        runs: [ "ubicloud-standard-4"]
     runs-on: ${{ matrix.runs }}
     name: FreeBSD
     env:
