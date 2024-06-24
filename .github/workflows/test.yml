@@ -90,7 +90,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: Test in FreeBSD
       id: test
-      uses: Migelo/freebsd-vm@4d197d7f78d47d30bf406852388d2d75703d1d6c
+      uses: Migelo/freebsd-vm@d510631682e414aa4e0567c5ecbc0045c506b756
       with:
         envs: 'MYTOKEN MYTOKEN2'
         prepare: |
