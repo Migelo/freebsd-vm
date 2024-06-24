@@ -25,55 +25,55 @@ on:
 
 jobs:
   # testsshfs:
-    if: ${{ !contains(github.repository, 'solaris') && !contains(github.repository, 'dragonflybsd') && !contains(github.repository, 'omnios')}}
-    strategy:
-      matrix:
-        release: [ "13.2", "13.3", "14.0", ""]
-        runs: [ "ubuntu-22.04"]
-    runs-on: ${{ matrix.runs }}
-    name: sshfs FreeBSD
-    env:
-      MYTOKEN : ${{ secrets.MYTOKEN }}
-      MYTOKEN2: "value2"
-      SEC_VBOX : ${{ secrets.SEC_VBOX }}
-      DEBUG: 1
-    steps:
-    - uses: actions/checkout@v4
-    - name: Creating Web console
-      uses: vmactions/cf-tunnel@v0
-      id: tunnel
-      with:
-        protocol: http
-        port: 8000
-    - name: Test in FreeBSD
-      id: test
-      uses: vmactions/freebsd-vm@50013ebd90a6643b112022721c7b0649636a1937
-      with:
-        envs: 'DEBUG MYTOKEN MYTOKEN2'
-        prepare: |
-          pkg install -y curl
-        mem: 2048
-        release: ${{ matrix.release }}
-        nat: |
-          "10022": "22"
-          "8080": "80"
-          "8443": "443"
-          udp:"8081": "80"
-        usesh: true
-        sync: sshfs
-        run: |
-          ls -lah /root/work
-          tree $HOME/work/
-          if [ -z "$(ls -A $HOME/work)" ]; then
-            echo "sshfs error."
-            exit 1
-          fi
-          echo "TEST_ENV=abc" >>${GITHUB_ENV}
-    - name: Test NAT
-      run:
-        echo "TEST_ENV=$TEST_ENV"
-        [ "$TEST_ENV" = "abc" ]
-        ssh -vvv -p 10022 -i $HOME/.ssh/host.id_rsa root@localhost "uname -a;whoami;pwd"
+  #   if: ${{ !contains(github.repository, 'solaris') && !contains(github.repository, 'dragonflybsd') && !contains(github.repository, 'omnios')}}
+  #   strategy:
+  #     matrix:
+  #       release: [ "13.2", "13.3", "14.0", ""]
+  #       runs: [ "ubuntu-22.04"]
+  #   runs-on: ${{ matrix.runs }}
+  #   name: sshfs FreeBSD
+  #   env:
+  #     MYTOKEN : ${{ secrets.MYTOKEN }}
+  #     MYTOKEN2: "value2"
+  #     SEC_VBOX : ${{ secrets.SEC_VBOX }}
+  #     DEBUG: 1
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #   - name: Creating Web console
+  #     uses: vmactions/cf-tunnel@v0
+  #     id: tunnel
+  #     with:
+  #       protocol: http
+  #       port: 8000
+  #   - name: Test in FreeBSD
+  #     id: test
+  #     uses: vmactions/freebsd-vm@50013ebd90a6643b112022721c7b0649636a1937
+  #     with:
+  #       envs: 'DEBUG MYTOKEN MYTOKEN2'
+  #       prepare: |
+  #         pkg install -y curl
+  #       mem: 2048
+  #       release: ${{ matrix.release }}
+  #       nat: |
+  #         "10022": "22"
+  #         "8080": "80"
+  #         "8443": "443"
+  #         udp:"8081": "80"
+  #       usesh: true
+  #       sync: sshfs
+  #       run: |
+  #         ls -lah /root/work
+  #         tree $HOME/work/
+  #         if [ -z "$(ls -A $HOME/work)" ]; then
+  #           echo "sshfs error."
+  #           exit 1
+  #         fi
+  #         echo "TEST_ENV=abc" >>${GITHUB_ENV}
+  #   - name: Test NAT
+  #     run:
+  #       echo "TEST_ENV=$TEST_ENV"
+  #       [ "$TEST_ENV" = "abc" ]
+  #       ssh -vvv -p 10022 -i $HOME/.ssh/host.id_rsa root@localhost "uname -a;whoami;pwd"
 
   test:
     strategy:
